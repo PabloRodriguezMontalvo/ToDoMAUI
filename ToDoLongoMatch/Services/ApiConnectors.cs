@@ -23,7 +23,8 @@ namespace ToDoLongoMatch.Services
 {
     public class ApiConnectors
     {
-       static string URLAPI = "http://10.0.2.2:8080/api/todo/";
+       static string URLAPI = "http://localhost:8080/api/todo/";
+        //IMPORTANTE EN DEBUG: entrar a chrome =>  chrome://inspect/#devices y habilitar el port triggering
         HttpClient client = new HttpClient();
         Uri ApiUri;
         public ApiConnectors()
@@ -56,7 +57,7 @@ namespace ToDoLongoMatch.Services
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var response = await client.DeleteAsync("Delete?id="+item.Key);
 
-            //Task<IEnumerable<TodoItem>?> ListItems = (response.Content.ReadFromJsonAsync<IEnumerable<TodoItem>>());
+          
             return;
         }
         public async Task Create(TodoItem item)

@@ -28,7 +28,6 @@ namespace ToDoLongoMatch.ViewModels
 
         [ObservableProperty]
         ObservableCollection<TodoItem> myItems;
-      
 
         public ICommand CreateNewItem => new Command(NewItem);
         public ICommand Completed => new Command<TodoItem>((TodoItem item)=> { CompleteTask(item); });
@@ -38,8 +37,6 @@ namespace ToDoLongoMatch.ViewModels
         
         public MainViewModel()
         {
-            //_repositoryService = repositoryService;
-
             LoadItems();
         }
 
@@ -49,10 +46,8 @@ namespace ToDoLongoMatch.ViewModels
             var CreateItem = new NewItemViewModel( this);
             var NewView = new CreateView(CreateItem);
             await App.Current.MainPage.Navigation.PushModalAsync(NewView);
-
         }
-
-        private void CompleteTask(TodoItem CompletedItem) {
+        private async void CompleteTask(TodoItem CompletedItem) {
             if (CompletedItem != null)
             {
                 if (CompletedItem.IsComplete)
@@ -62,20 +57,19 @@ namespace ToDoLongoMatch.ViewModels
                     CompletedItem.IsComplete = true;
 
                 }
-                App.ApiConnectors.Update(CompletedItem.Key, CompletedItem);
-                //_repositoryService.Update(CompletedItem);
-                LoadItems();
+               await App.ApiConnectors.Update(CompletedItem.Key, CompletedItem);
+               LoadItems();
             }
         }
-        private void DeleteTask(TodoItem CompletedItem)
+        private async void DeleteTask(TodoItem CompletedItem)
         {
             if (CompletedItem != null)
             {
-               App.ApiConnectors.Remove(CompletedItem);
+              await App.ApiConnectors.Remove(CompletedItem);
                 LoadItems();
             }
             
-                 App.AlertSvc.ShowAlert("Deleted:", $"{CompletedItem.Name}");
+              App.AlertSvc.ShowAlert("Deleted:", $"{CompletedItem.Name}");
 
              
            
@@ -83,15 +77,12 @@ namespace ToDoLongoMatch.ViewModels
         [RelayCommand]
         public void LoadItems()
         {
-          
                 cargando=true;
                 myItems = new ObservableCollection<TodoItem>(App.ApiConnectors.GetAll().Result);
                 cargando=false;
                 OnPropertyChanged("MyItems");
                 OnPropertyChanged("Cargando");
 
-  
-          
         }
     }
 }

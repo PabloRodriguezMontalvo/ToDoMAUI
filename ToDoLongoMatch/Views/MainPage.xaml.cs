@@ -18,7 +18,7 @@ public partial class MainPage : ContentPage
 
     }
 
-    private void MyListView_ItemTapped(object sender, ItemTappedEventArgs e)
+    private async void MyListView_ItemTapped(object sender, ItemTappedEventArgs e)
     {
 		var MyList = (ListView)sender;
 		TodoItem MyItem = (TodoItem)MyList.SelectedItem;
@@ -29,8 +29,11 @@ public partial class MainPage : ContentPage
 		{
             MyItem.IsComplete = true;
 		}
-		App.ApiConnectors.Update(MyItem.Key, MyItem);
+		await App.ApiConnectors.Update(MyItem.Key, MyItem);
 		OnPropertyChanged(("MyItems"));
+		MyList.ItemsSource = App.ApiConnectors.GetAll().Result;
+        OnPropertyChanged(("MyList"));
+
     }
 }
 

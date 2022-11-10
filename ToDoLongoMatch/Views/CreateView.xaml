@@ -7,7 +7,7 @@
         <StackLayout BackgroundColor="#f0f7ff" Padding="10" Orientation="Horizontal">
                 <Label Padding="10" Text="Name:"></Label>
                 <Entry TextColor="Black" HorizontalOptions="FillAndExpand" Text="{Binding NewItemsText}" />
-                <Button WidthRequest="60" Text="Add" Command="{Binding AddNewItem}" />
+                <Button CornerRadius="0" WidthRequest="60" Text="Add" Command="{Binding AddNewItem}" />
             </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

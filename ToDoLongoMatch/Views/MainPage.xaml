@@ -16,9 +16,7 @@
                        
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Check/Uncheck"
-                                Command="{Binding Path=BindingContext.Completed, Source={x:Reference MyListView} }"
-                                CommandParameter="{Binding .}"/>
+                               
                                 <MenuItem  Command="{Binding Path=BindingContext.Delete, Source={x:Reference MyListView} }"
                                   CommandParameter="{Binding .}"
                                   Text="Delete" IsDestructive="True" />
@@ -35,17 +33,14 @@
 
                                 <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Text="{Binding Name}" />
                                
-                                <!--<HorizontalStackLayout Grid.Column="2"  HorizontalOptions="EndAndExpand">
-
-                                    <Button CornerRadius="0" HeightRequest="100" HorizontalOptions="End" Background="red" TextColor="White" Text="Delete" />
-                                </HorizontalStackLayout>-->
+                               
                             </Grid>
                         </ViewCell>
                       
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Command="{Binding CreateNewItem}" Text="New"></Button>
+            <Button CornerRadius="0" Command="{Binding CreateNewItem}" Text="New"></Button>
         </StackLayout>
     </ScrollView>
 </ContentPage>
