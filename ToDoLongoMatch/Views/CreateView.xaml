@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoLongoMatch.Views.CreateView"
+             Title="CreateView">
+    <VerticalStackLayout Padding="10">
+        <StackLayout BackgroundColor="#f0f7ff" Padding="10" Orientation="Horizontal">
+                <Label Padding="10" Text="Name:"></Label>
+                <Entry TextColor="Black" HorizontalOptions="FillAndExpand" Text="{Binding NewItemsText}" />
+                <Button WidthRequest="60" Text="Add" Command="{Binding AddNewItem}" />
+            </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

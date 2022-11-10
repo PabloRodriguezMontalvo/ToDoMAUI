@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ToDoLongoMatch.ViewModels"
+             x:Class="ToDoLongoMatch.MainPage">
+    
+    <ScrollView>
+        <ScrollView.Padding>
+            <OnPlatform x:TypeArguments="Thickness" />
+        </ScrollView.Padding>
+        <StackLayout>
+
+            <ListView x:Name="MyListView"  HorizontalScrollBarVisibility="Always" Header="Tasks:"  IsRefreshing="{Binding Cargando}" RefreshCommand="{Binding RefreshTable}" IsPullToRefreshEnabled="True"  ItemsSource="{Binding MyItems}" ItemTapped="MyListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                       
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Check/Uncheck"
+                                Command="{Binding Path=BindingContext.Completed, Source={x:Reference MyListView} }"
+                                CommandParameter="{Binding .}"/>
+                                <MenuItem  Command="{Binding Path=BindingContext.Delete, Source={x:Reference MyListView} }"
+                                  CommandParameter="{Binding .}"
+                                  Text="Delete" IsDestructive="True" />
+
+                            </ViewCell.ContextActions>
+                            <Grid Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"></ColumnDefinition>
+                                    <ColumnDefinition  Width="*"></ColumnDefinition>
+                                    <ColumnDefinition  Width="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" VerticalOptions="Center" Padding="0, 0, 0, 5" FontSize="15" FontFamily="Trebuchet MS"  Text="✅" IsVisible="{Binding IsComplete}"/>
+
+
+                                <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Text="{Binding Name}" />
+                               
+                                <!--<HorizontalStackLayout Grid.Column="2"  HorizontalOptions="EndAndExpand">
+
+                                    <Button CornerRadius="0" HeightRequest="100" HorizontalOptions="End" Background="red" TextColor="White" Text="Delete" />
+                                </HorizontalStackLayout>-->
+                            </Grid>
+                        </ViewCell>
+                      
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Command="{Binding CreateNewItem}" Text="New"></Button>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
